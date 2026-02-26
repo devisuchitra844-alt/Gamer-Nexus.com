@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON-X | Trade & Play</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a0c;
+            --card-bg: #16161a;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--neon-blue);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav button {
+            background: none;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 10px 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        nav button:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .section { display: none; padding: 40px; }
+        .active { display: block; }
+
+        /* Trading Section */
+        .trading-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #333;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .price-display { font-size: 3rem; color: #00ff88; margin: 20px 0; font-family: monospace; }
+
+        .btn-buy { background: #00ff88; color: black; padding: 15px 40px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; margin-right: 10px; }
+        .btn-sell { background: #ff3e3e; color: white; padding: 15px 40px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+
+        /* Gaming Section */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border: 1px solid var(--neon-purple);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .game-card:hover { transform: scale(1.05); border-color: var(--neon-blue); }
+
+        .game-img { width: 100%; height: 200px; background: #333; display: flex; align-items: center; justify-content: center; font-style: italic; color: #555; }
+
+        .game-info { padding: 20px; }
+
+        h2 { color: var(--neon-blue); text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button onclick="show('trading')">💹 Trade Terminal</button>
+    <button onclick="show('gaming')">🎮 Gaming Vault</button>
+</nav>
+
+<div id="trading" class="section active">
+    <h1 style="text-align: center;">GLOBAL TRADING ASSET</h1>
+    <div class="trading-card">
+        <h3>Current Market Value</h3>
+        <div class="price-display" id="price">$42,069.12</div>
+        <p>Wallet Balance: <span id="balance">1,000.00</span> USD</p>
+        <button class="btn-buy" onclick="trade('buy')">BUY</button>
+        <button class="btn-sell" onclick="trade('sell')">SELL</button>
+    </div>
+</div>
+
+<div id="gaming" class="section">
+    <h1 style="text-align: center;">REALISTIC ENGINE 2.0</h1>
+    <div class="game-grid">
+        <div class="game-card">
+            <div class="game-img" style="background: url('https://via.placeholder.com/400x200/00f2ff/000000?text=VELOCITY+8') center/cover;"></div>
+            <div class="game-info">
+                <h2>Velocity 8: Ion Drift</h2>
+                <p>Ultra-realistic hypercar racing across neo-Tokyo. Advanced physics and ray-tracing enabled.</p>
+                <button class="btn-buy" style="width:100%">LAUNCH MISSION</button>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-img" style="background: url('https://via.placeholder.com/400x200/bc13fe/000000?text=NEON+PROTOCOL') center/cover;"></div>
+            <div class="game-info">
+                <h2>Neon Protocol: Zero Hour</h2>
+                <p>Tactical battle royale. 100 players drop, 1 cyborg survives. Photorealistic environments.</p>
+                <button class="btn-buy" style="width:100%">JOIN LOBBY</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Navigation Logic
+    function show(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Simple Trading Simulation
+    let balance = 1000;
+    function trade(type) {
+        if(type === 'buy') {
+            balance -= 50;
+            alert("Asset Purchased! Your new balance is: $" + balance);
+        } else {
+            balance += 45;
+            alert("Asset Sold! Your new balance is: $" + balance);
+        }
+        document.getElementById('balance').innerText = balance.toFixed(2);
+    }
+
+    // Price Fluctuation Simulation
+    setInterval(() => {
+        let price = 42000 + (Math.random() * 100);
+        document.getElementById('price').innerText = "$" + price.toFixed(2);
+    }, 2000);
+</script>
+
+</body>
+</html>
+                   
